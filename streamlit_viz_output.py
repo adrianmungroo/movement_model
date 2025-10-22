@@ -9,8 +9,8 @@ st.set_page_config(page_title="Edge Time Series Viz", layout="wide")
 # -------------------------------------------------------------
 # CONFIG: set your file paths
 # -------------------------------------------------------------
-PARQUET_PATH = "data\edge_time_series.parquet"
-EDGES_PATH = "data\walk_edges_clean.geojson"
+PARQUET_PATH = r"data/edge_time_series.parquet"
+EDGES_PATH = r"data/walk_edges_clean.geojson"
 
 # -------------------------------------------------------------
 # LOAD DATA (no checks, assumes correct)
