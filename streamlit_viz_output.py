@@ -32,8 +32,9 @@ edges_projected = edges.to_crs("EPSG:2240")
 # -------------------------------------------------------------
 # UI SETUP
 # -------------------------------------------------------------
-st.write("# Edge Time Series Visualization")
+st.write("# GT Spatio-Temporal Movement Visualization")
 st.caption(f"Made by Adrian Mungroo, Simon Ramdath and Isaac Lo")
+st.write("This app allows you to visualize the movement of people within the GT campus. It combines GIS data from campus building geometries & walkways and timeseries WiFi data collected between April 14th and 15th, 2025.")
 
 # Initialize session state for selected edge
 if 'selected_objectid' not in st.session_state:
@@ -45,7 +46,7 @@ if n == 0:
 
 # Get time values for selection
 time_values = edge_time_series.index
-default_time = time_values[n // 10] if n > 1 else time_values[0]
+default_time = time_values[0]
 
 # Sidebar controls
 st.sidebar.header("Visualization Settings")
