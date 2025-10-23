@@ -33,7 +33,7 @@ edges_projected = edges.to_crs("EPSG:2240")
 # UI SETUP
 # -------------------------------------------------------------
 st.write("# Edge Time Series Visualization")
-st.caption(f"Made by Adrian Mungroo, Simon Ramdath")
+st.caption(f"Made by Adrian Mungroo, Simon Ramdath and Isaac Lo")
 
 # Initialize session state for selected edge
 if 'selected_objectid' not in st.session_state:
