@@ -1,4 +1,5 @@
 streamlit
+streamlit-folium
 numpy
 geopandas
 pandas
@@ -6,3 +7,4 @@ matplotlib
 folium
 pyarrow
 mapclassify
+shapely
