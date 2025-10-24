@@ -5,6 +5,8 @@ import numpy as np
 from streamlit_folium import st_folium
 from shapely.geometry import Point
 import matplotlib.pyplot as plt
+import matplotlib as mpl 
+from matplotlib.colors import LinearSegmentedColormap
 
 st.set_page_config(
     page_title="Edge Time Series Viz", 
@@ -51,9 +53,14 @@ default_time = time_values[0]
 # Sidebar controls
 st.sidebar.header("Visualization Settings")
 
-cmap_name = st.sidebar.selectbox("Colormap", ["Blues","Reds"], index=0)
+# make custom colormap 
+stops = [ (0.00, "#b3e5ed"), (0.50, "#1372a6"), (1.00, "#000000") ] 
+my_cmap = LinearSegmentedColormap.from_list("custom", stops, N=256) 
+mpl.colormaps.register(name="custom", cmap=my_cmap, force=True)
+
+cmap_name = st.sidebar.selectbox("Colormap", ["custom","Blues","Reds"], index=0)
 line_weight = st.sidebar.slider("Line weight", 1, 7, 3)
-clip_quantiles = st.sidebar.checkbox("Clip color scale to 1–99% quantiles", value=True)
+clip_quantiles = st.sidebar.checkbox("Clip color scale to 2–98% quantiles", value=False)
 use_log1p = st.sidebar.checkbox("log1p transform (display only)", value=False)
 
 # Main area: Time selection (outside sidebar)
@@ -85,8 +92,8 @@ vals = np.log1p(t["count"].to_numpy()) if use_log1p else t["count"].to_numpy()
 
 # Optional clipping for color scale
 if clip_quantiles:
-    vmin = float(np.quantile(vals, 0.01))
-    vmax = float(np.quantile(vals, 0.99))
+    vmin = float(np.quantile(vals, 0.02))
+    vmax = float(np.quantile(vals, 0.98))
 else:
     vmin = float(vals.min())
     vmax = float(vals.max())
